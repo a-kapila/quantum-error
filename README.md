@@ -7,3 +7,4 @@ Summer Project exploring errors in NISQs and eventually trying to learn them via
 * **openpulse_tutorials** contains rough and ready notes from IBM researchers on advanced QIT/ Qiskit topics.
 * **papers** contains papers I read during the course of the project.
 * **sample_algorithms** were how I taught myself to code circuits in Qiskit.
+* **mathematical work** https://www.overleaf.com/9815798778xvnysgppzrhm
