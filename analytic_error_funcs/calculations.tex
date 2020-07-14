@@ -1,0 +1,165 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./calculations_images/} }
+
+\begin{document}
+
+\begin{matlabcode}
+
+syms phi lambda theta dtheta dphi real
+assumeAlso (-1*pi < phi <= pi)
+assumeAlso (-1*pi < lambda <= pi)
+assumeAlso (-1*pi < theta <= pi)
+assumeAlso (-1*pi < dtheta <= pi)
+assumeAlso (-1*pi < dphi <= pi)
+syms n
+assumeAlso (n, 'integer')
+assumptions
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+ans = 
+    $\displaystyle \left(\begin{array}{cccccccccccccccccc}
+\varphi \in \mathbb{R} & \theta \in \mathbb{R} & x\in \mathbb{R} & y\in \mathbb{R} & \textrm{dphi}\le \pi  & \textrm{dtheta}\le \pi  & \lambda \le \pi  & \varphi \le \pi  & \theta \le \pi  & -\pi <\textrm{dphi} & -\pi <\textrm{dtheta} & -\pi <\lambda  & -\pi <\varphi  & -\pi <\theta  & \textrm{dphi}\in \mathbb{R} & \textrm{dtheta}\in \mathbb{R} & n\in \mathbb{Z} & \lambda \in \mathbb{R}
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+rz = @(x) [1, 0;0, cos(x + dphi) + 1i*sin(x + dphi)]
+\end{matlabcode}
+\begin{matlaboutput}
+rz = 
+    @(x)[1,0;0,cos(x+dphi)+1i*sin(x+dphi)]
+
+\end{matlaboutput}
+\begin{matlabcode}
+x90 = cos(pi/4 + dtheta/2)*eye(2) - 1i*sin(pi/4 + dtheta/2)*[0, 1;1, 0]
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+x90 = 
+    $\displaystyle \left(\begin{array}{cc}
+\cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right) & -\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\,i\\
+-\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\,i & \cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+u2 = rz(phi + pi/2)*x90*rz(lambda-pi/2)
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+u2 = 
+    $\displaystyle \begin{array}{l}
+\left(\begin{array}{cc}
+\cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right) & -\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\,\sigma_2 \,i\\
+-\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\,\sigma_1 \,i & \cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\,\sigma_2 \,\sigma_1 
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 =\cos \left(\textrm{dphi}+\varphi +\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\varphi +\frac{\pi }{2}\right)\,i\\
+\mathrm{}\\
+\;\;\sigma_2 =\cos \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)\,i
+\end{array}$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+
+u3 = rz(phi - pi/2)*x90*rz(pi - theta)*x90*rz(lambda - pi/2) 
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+u3 = 
+    $\displaystyle \begin{array}{l}
+\left(\begin{array}{cc}
+{\sigma_2 }^2 +\sigma_4 \,{\sigma_3 }^2  & -\sigma_5 \,{\left(\sigma_2 \,\sigma_3 \,i-\sigma_2 \,\sigma_3 \,\sigma_4 \,i\right)}\\
+-\sigma_2 \,\sigma_3 \,\sigma_1 \,i+\sigma_2 \,\sigma_3 \,\sigma_1 \,\sigma_4 \,i & -\sigma_5 \,{\left(\sigma_1 \,\sigma_4 \,{\sigma_2 }^2 +\sigma_1 \,{\sigma_3 }^2 \right)}
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 =\cos \left(\textrm{dphi}+\varphi -\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\varphi -\frac{\pi }{2}\right)\,i\\
+\mathrm{}\\
+\;\;\sigma_2 =\cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\\
+\mathrm{}\\
+\;\;\sigma_3 =\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\\
+\mathrm{}\\
+\;\;\sigma_4 =\cos \left(\textrm{dphi}-\theta \right)+\sin \left(\textrm{dphi}-\theta \right)\,i\\
+\mathrm{}\\
+\;\;\sigma_5 =\cos \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)\,i
+\end{array}$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+rx =  rz(-pi)*x90*rz(pi - theta)*x90
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+rx = 
+    $\displaystyle \begin{array}{l}
+\left(\begin{array}{cc}
+{\sigma_2 }^2 +\sigma_1 \,{\sigma_3 }^2  & -\sigma_2 \,\sigma_3 \,i+\sigma_2 \,\sigma_3 \,\sigma_1 \,i\\
+\sigma_2 \,\sigma_3 \,\sigma_4 \,i-\sigma_2 \,\sigma_3 \,\sigma_4 \,\sigma_1 \,i & \sigma_4 \,\sigma_1 \,{\sigma_2 }^2 +\sigma_4 \,{\sigma_3 }^2 
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 =\cos \left(\textrm{dphi}-\theta \right)+\sin \left(\textrm{dphi}-\theta \right)\,i\\
+\mathrm{}\\
+\;\;\sigma_2 =\cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\\
+\mathrm{}\\
+\;\;\sigma_3 =\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\\
+\mathrm{}\\
+\;\;\sigma_4 =\cos \left(\textrm{dphi}\right)+\sin \left(\textrm{dphi}\right)\,i
+\end{array}$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+u2_2 = u2^2
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+u2_2 = 
+    $\displaystyle \begin{array}{l}
+\left(\begin{array}{cc}
+{\sigma_1 }^2 -\sigma_2  & -\sigma_1 \,\sigma_5 \,\sigma_4 \,i-\sigma_1 \,\sigma_5 \,{\sigma_4 }^2 \,\sigma_3 \,i\\
+-\sigma_1 \,\sigma_5 \,\sigma_3 \,i-\sigma_1 \,\sigma_5 \,\sigma_4 \,{\sigma_3 }^2 \,i & {\sigma_1 }^2 \,{\sigma_4 }^2 \,{\sigma_3 }^2 -\sigma_2 
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 =\cos \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)\\
+\mathrm{}\\
+\;\;\sigma_2 ={\sigma_5 }^2 \,\sigma_4 \,\sigma_3 \\
+\mathrm{}\\
+\;\;\sigma_3 =\cos \left(\textrm{dphi}+\varphi +\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\varphi +\frac{\pi }{2}\right)\,i\\
+\mathrm{}\\
+\;\;\sigma_4 =\cos \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)+\sin \left(\textrm{dphi}+\lambda -\frac{\pi }{2}\right)\,i\\
+\mathrm{}\\
+\;\;\sigma_5 =\sin \left(\frac{\textrm{dtheta}}{2}+\frac{\pi }{4}\right)
+\end{array}$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+u2_prob = simplify(abs(u2_2 (1,1))^2)
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+u2_prob = 
+    $\displaystyle {\left|\frac{1}{2}+{\left(-\sin \left(\textrm{dphi}+\lambda \right)+\cos \left(\textrm{dphi}+\lambda \right)\,i\right)}\,{\left(-\sin \left(\textrm{dphi}+\varphi \right)+\cos \left(\textrm{dphi}+\varphi \right)\,i\right)}\,{\left(\frac{\sin \left(\textrm{dtheta}\right)}{2}+\frac{1}{2}\right)}-\frac{\sin \left(\textrm{dtheta}\right)}{2}\right|}^2 $
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+%u3_prob = simplify(abs(u3(1,1))^2)
+%rx_prob = simplify(abs(rx(1,1))^2)
+
+
+%u2_error = -\frac{\delta\theta}{2}/2 = const in lambda, phi
+%rx_error(theta) = u3_error(theta) = \frac{1}{2} ((-1 + cos^2(\delta\theta) cos(\delta\phi))cos(\theta) + sin^2(\delta\theta) + \cos^2(\delta\theta) \sin(\delta\phi)\sin(\theta))
+\end{matlabcode}
+
+\end{document}
