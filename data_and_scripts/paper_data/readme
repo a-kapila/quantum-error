@@ -1,0 +1,4 @@
+Contains:1) Hongxiang's code and plots of Y(phi) error vs phi (theoretically gives the same results as X(phi)). Can easily be rerun
+2)CX error experiment. Set qubit0 to 1, do repeated controlled X rotations with qubit0 as control.
+3)Repeated X gate experiment with different 'families'. all fairly clearly labelled; the left-hand column is excel is the number of the specified gate in the circuit.
+Am doing more of these to get a more complete picture but looking on excel supports the ideas of multiple 'families'. See IBMQ_armonk example plot (legend is wrong) for what we should be looking for.
